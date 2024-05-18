@@ -3,6 +3,10 @@ import {Username} from './username'
 import {AddTask} from './addTask'
 export const Home=()=>{
 
+    window.addEventListener('beforeunload',(e)=>{
+        e.preventDefault();
+    })
+
     let count=Number(1);
 
     function getTodayTime() {
@@ -16,6 +20,8 @@ export const Home=()=>{
         document.getElementById('input_taskheading').value=""
         document.getElementById('input_taskdescription').value=""
         document.getElementById('input_endtime').value=""
+        document.getElementById('input_starttime').value=""
+
     }
 
     function is_alpha_contain(sender_alpha_contain){
@@ -32,6 +38,8 @@ export const Home=()=>{
         let thead=document.getElementById('input_taskheading').value
         let tdesc=document.getElementById('input_taskdescription').value
         let tend=document.getElementById('input_endtime').value
+        let tstart=document.getElementById('input_starttime').value
+
 
         if(is_alpha_contain(thead.toLowerCase()) && is_alpha_contain(tdesc.toLowerCase()) && tend!==""){
             let hours_end=tend.slice(0,2)
@@ -41,9 +49,9 @@ export const Home=()=>{
             if(minutes_end[0]==='0')
                 minutes_end=minutes_end[1]
 
-            const time=new Date()
-            let hours_now=time.getHours()
-            let minutes_now=time.getMinutes()
+            // const time=tstart
+            let hours_now=tstart.slice(0,2)
+            let minutes_now=tstart.slice(3,5)
             if(hours_now[0]==='0')
                 hours_now=hours_now[1]
             if(minutes_now[0]==='0')
@@ -54,6 +62,7 @@ export const Home=()=>{
             document.getElementById('input_taskheading').value=""
             document.getElementById('input_taskdescription').value=""
             document.getElementById('input_endtime').value=""
+            document.getElementById('input_starttime').value=""
             
             let task_container=document.getElementById('task_container')
 
@@ -74,6 +83,11 @@ export const Home=()=>{
             p_taskdescription.className='p-taskdescription'
             p_taskdescription.id="taskdescription_"+count
             p_taskdescription.textContent=tdesc
+
+            let p_starttime=document.createElement('p')
+            p_starttime.className='p-endtime'
+            p_starttime.id="starttime_"+count
+            p_starttime.textContent="Start Time:"+tstart
 
             let p_endtime=document.createElement('p')
             p_endtime.className='p-endtime'
@@ -96,10 +110,12 @@ export const Home=()=>{
                 let th=document.getElementById('taskheading_'+e.target.id.slice(5,6)).textContent
                 let td=document.getElementById('taskdescription_'+e.target.id.slice(5,6)).textContent
                 let te=document.getElementById('endtime_'+e.target.id.slice(5,6)).textContent
+                let ts=document.getElementById('starttime_'+e.target.id.slice(5,6)).textContent
 
                 document.getElementById('addtask_input_taskheading').value=th
                 document.getElementById('addtask_input_taskdescription').value=td
                 document.getElementById('addtask_input_endtime').value=te.slice(9)
+                document.getElementById('addtask_input_starttime').value=ts.slice(11)
                 document.getElementById('id_holder').value=e.target.id.slice(5,6)
 
             })
@@ -116,6 +132,7 @@ export const Home=()=>{
             each_task.appendChild(p_sno)
             each_task.appendChild(p_taskheading)
             each_task.appendChild(p_taskdescription)
+            each_task.appendChild(p_starttime)
             each_task.appendChild(p_endtime)
             each_task.appendChild(p_remainingtime)
             each_task.appendChild(button_edit)
@@ -139,6 +156,7 @@ export const Home=()=>{
                     <p className='username' id='username-space'>Username</p>    
                     <input type='text' className='input-taskheading' placeholder='Task Heading' id='input_taskheading'/>
                     <input type='text' className='input-taskdescription' placeholder='Task Description' id='input_taskdescription'/>
+                    <input type='time' className='input-endtime' min={getTodayTime()} id='input_starttime'/>
                     <input type='time' className='input-endtime' min={getTodayTime()} id='input_endtime'/>
                     <button className='button-addtask' onClick={addTask}>Add Task</button>
                     <button className='button-clearall' onClick={clearAll}>Clear All</button>

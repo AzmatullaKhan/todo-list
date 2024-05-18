@@ -110,7 +110,7 @@ li{
 }
 .input-taskdescription{
     height:40px;
-    width:520px;
+    width:320px;
     box-sizing: content-box;
     color: #fff;
     background-color: transparent;
@@ -199,7 +199,7 @@ li{
 }
 .p-sno{
     height:60px;
-    width:120px;
+    width:80px;
     box-sizing: border-box;
     padding:4px;
     display: flex;
@@ -208,7 +208,7 @@ li{
 }
 .p-taskheading{
     height:60px;
-    width:260px;
+    width:180px;
     box-sizing: border-box;
     padding:4px;
     display: flex;
@@ -217,7 +217,7 @@ li{
 }
 .p-taskdescription{
     height:60px;
-    width:520px;
+    width:320px;
     box-sizing: border-box;
     padding:4px;
     display: flex;
