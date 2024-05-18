@@ -1,5 +1,6 @@
 import './home.css'
-// import { task } from '../tasks';
+import {Username} from './username'
+import {AddTask} from './addTask'
 export const Home=()=>{
 
     let count=Number(1);
@@ -66,23 +67,42 @@ export const Home=()=>{
 
             let p_taskheading=document.createElement('p')
             p_taskheading.className='p-taskheading'
+            p_taskheading.id='taskheading_'+count
             p_taskheading.textContent=thead
 
             let p_taskdescription=document.createElement('p')
             p_taskdescription.className='p-taskdescription'
+            p_taskdescription.id="taskdescription_"+count
             p_taskdescription.textContent=tdesc
 
             let p_endtime=document.createElement('p')
             p_endtime.className='p-endtime'
+            p_endtime.id="endtime_"+count
             p_endtime.textContent="End Time:"+tend
 
-            let p_remainingdays=document.createElement('p')
-            p_remainingdays.className='p-remainingDays'
-            p_remainingdays.textContent="Time left :"+minutes_left+" minutes."
+            let p_remainingtime=document.createElement('p')
+            p_remainingtime.className='p-remainingtime'
+            p_remainingtime.id='remainingtime_'+count
+            p_remainingtime.textContent="Time alotted :"+minutes_left+" minutes."
 
             let button_edit=document.createElement('button')
             button_edit.className='button-edit'
             button_edit.innerHTML='Edit'
+            button_edit.id='edit_'+count
+            button_edit.addEventListener('click', (e)=>{
+
+                document.getElementById('addtask-background').className='addtask-background'
+
+                let th=document.getElementById('taskheading_'+e.target.id.slice(5,6)).textContent
+                let td=document.getElementById('taskdescription_'+e.target.id.slice(5,6)).textContent
+                let te=document.getElementById('endtime_'+e.target.id.slice(5,6)).textContent
+
+                document.getElementById('addtask_input_taskheading').value=th
+                document.getElementById('addtask_input_taskdescription').value=td
+                document.getElementById('addtask_input_endtime').value=te.slice(9)
+                document.getElementById('id_holder').value=e.target.id.slice(5,6)
+
+            })
 
             let button_done=document.createElement('button')
             button_done.className='button-done'
@@ -97,7 +117,7 @@ export const Home=()=>{
             each_task.appendChild(p_taskheading)
             each_task.appendChild(p_taskdescription)
             each_task.appendChild(p_endtime)
-            each_task.appendChild(p_remainingdays)
+            each_task.appendChild(p_remainingtime)
             each_task.appendChild(button_edit)
             each_task.appendChild(button_done)
 
@@ -109,8 +129,6 @@ export const Home=()=>{
         else{
             alert('Enter the details that are asked properly')
         }
-        console.log(document.querySelector('.task-container'))
-        
 
     }
 
@@ -118,7 +136,7 @@ export const Home=()=>{
         <div className="todolist-background">
             <div className='todolist-container'>
                 <div className='addtask-container'>
-                    <p className='username'>Username</p>
+                    <p className='username' id='username-space'>Username</p>    
                     <input type='text' className='input-taskheading' placeholder='Task Heading' id='input_taskheading'/>
                     <input type='text' className='input-taskdescription' placeholder='Task Description' id='input_taskdescription'/>
                     <input type='time' className='input-endtime' min={getTodayTime()} id='input_endtime'/>
@@ -127,6 +145,11 @@ export const Home=()=>{
                 </div>
                 <div className='task-container' id='task_container'>
                 </div>
+            </div>
+            <div style={{position:"absolute"}}>
+                {/* <Username /> */}
+                <div className="username-main" id='username_main'><Username /></div>
+                <div className='addtask-hidden' id='addtask-background'><AddTask /></div>
             </div>
         </div>
     )

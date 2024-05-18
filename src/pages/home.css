@@ -90,6 +90,7 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: underline;
 }
 .input-taskheading{
     height:40px;
@@ -232,7 +233,7 @@ li{
     justify-content: center;
     align-items: center;
 }
-.p-remainingDays{
+.p-remainingtime{
     height:60px;
     box-sizing: border-box;
     padding:4px;
@@ -282,4 +283,66 @@ li{
     font-size: 16px;
     color: #fff;
     border-radius: 6px;
+}
+
+
+
+
+.username-main{
+    height:820px;
+    width:1470px;
+    border:1px solid #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+.username-input{
+    height: 50px;
+    width:400px;
+    background-color: transparent;
+    outline: none;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+.username-submit{
+    height:40px;
+    width:100px;
+    box-sizing: border-box;
+    padding:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+    margin-left:50px;
+}
+.username-hidden{
+    display: none;
+}
+
+
+.addtask-hidden{
+    display: none;
+}
+.addtask-background{
+    height:820px;
+    width:1470px;
+    border:1px solid #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
 }
