@@ -1,8 +1,15 @@
 import './home.css'
 import {Username} from './username'
 import {AddTask} from './addTask'
+import { Report } from './report';
+
+
 export const Home=()=>{
 
+    let no_of_tasks_done=Number(0);
+    let no_of_tasks_total=Number(0);
+    let no_of_tasks_removed=Number(0);
+    
     window.addEventListener('beforeunload',(e)=>{
         e.preventDefault();
     })
@@ -127,6 +134,17 @@ export const Home=()=>{
             button_done.addEventListener('click', (e)=>{
                 task_container.removeChild(document.getElementById('task_'+e.target.id.slice(7,8)))
                 console.log(document.querySelector('.task-container'))
+                no_of_tasks_done+=1
+            })
+
+            let img_del=document.createElement('img')
+            img_del.src=require('../images/delete.png')
+            img_del.className='del-image'
+            img_del.id='imagee_'+count
+            img_del.addEventListener('click', (e)=>{
+                task_container.removeChild(document.getElementById('task_'+e.target.id.slice(7,8)))
+                console.log(document.querySelector('.task-container'))
+                no_of_tasks_removed+=1
             })
 
             each_task.appendChild(p_sno)
@@ -137,16 +155,75 @@ export const Home=()=>{
             each_task.appendChild(p_remainingtime)
             each_task.appendChild(button_edit)
             each_task.appendChild(button_done)
+            each_task.appendChild(img_del)
 
             task_container.appendChild(each_task)
 
             count=count+1
+            no_of_tasks_total+=1
 
         }
         else{
             alert('Enter the details that are asked properly')
         }
 
+    }
+
+    const checkStartTime=()=>{
+        const d=new Date()
+        let today_hours_now=d.getHours()
+        let today_minutes_now=d.getMinutes()
+        
+        let start_time=document.getElementById('input_starttime').value
+        let start_hours=Number(start_time.slice(0,2))
+        let start_minutes=(Number(start_time.slice(0,2))-today_hours_now)*60+Number(start_time.slice(3,5))
+
+        if(today_hours_now===start_hours && today_minutes_now<start_minutes){
+            return true
+        }
+        else if(today_hours_now<start_hours){
+            return true
+        }
+        else{
+            document.getElementById('input_starttime').value=""
+            alert('The alloted task start time must be above '+today_hours_now+" hours "+today_minutes_now+" miuntes")
+        }
+    }
+
+    const checkEndTime=()=>{
+        let start_hours_now=Number(document.getElementById('input_starttime').value.slice(0,2))
+        let start_minutes_now=Number(document.getElementById('input_starttime').value.slice(3,5))
+
+        if(document.getElementById('input_starttime').value===""){
+            alert("Select start time first which is left side of this input")
+            document.getElementById('input_endtime').value=""
+        }
+        else{
+            let end_time=document.getElementById('input_endtime').value
+            let end_hours=Number(end_time.slice(0,2))
+            let end_minutes=Number(end_time.slice(3,5))
+
+            if(start_hours_now===end_hours && start_minutes_now<end_minutes){
+                return true
+            }
+            else if(start_hours_now<end_hours){
+                return true
+            }
+            else{
+                document.getElementById('input_endtime').value=""
+                alert('The alloted task start time must be above '+start_hours_now+" hours "+start_minutes_now+" miuntes")
+            }
+        }
+        
+    }
+
+    const generateReport=()=>{
+        document.getElementById('report-background').className='report-background'
+        
+       document.getElementById('report-total').textContent="Total Task Generated :"+no_of_tasks_total
+       document.getElementById('report-done').textContent="Total Task Generated :"+no_of_tasks_done
+       document.getElementById('report-removed').textContent="Total Task Generated :"+no_of_tasks_removed
+    
     }
 
     return(
@@ -156,18 +233,20 @@ export const Home=()=>{
                     <p className='username' id='username-space'>Username</p>    
                     <input type='text' className='input-taskheading' placeholder='Task Heading' id='input_taskheading'/>
                     <input type='text' className='input-taskdescription' placeholder='Task Description' id='input_taskdescription'/>
-                    <input type='time' className='input-endtime' min={getTodayTime()} id='input_starttime'/>
-                    <input type='time' className='input-endtime' min={getTodayTime()} id='input_endtime'/>
+                    <input type='time' className='input-endtime' min={getTodayTime()} id='input_starttime' onChange={checkStartTime}/>
+                    <input type='time' className='input-endtime' min={getTodayTime()} id='input_endtime' onChange={checkEndTime}/>
                     <button className='button-addtask' onClick={addTask}>Add Task</button>
                     <button className='button-clearall' onClick={clearAll}>Clear All</button>
                 </div>
                 <div className='task-container' id='task_container'>
                 </div>
+                <button className='button-report' onClick={generateReport}>Generate Report</button>
             </div>
             <div style={{position:"absolute"}}>
                 {/* <Username /> */}
                 <div className="username-main" id='username_main'><Username /></div>
                 <div className='addtask-hidden' id='addtask-background'><AddTask /></div>
+                <div className='report-hidden' id='report-background'><Report /></div>
             </div>
         </div>
     )

@@ -177,13 +177,13 @@ li{
 
 
 .task-container{
-    height:660px;
+    height:600px;
     width:1430px;
     border-radius: 6px;
     overflow: scroll;
     padding: 8px;
     box-sizing: border-box;
-    /* border: 1px solid #fff; */
+    border: 1px solid #fff;
 }
 .each-task{
     height: 60px;
@@ -284,7 +284,12 @@ li{
     color: #fff;
     border-radius: 6px;
 }
-
+.del-image{
+    height:40px;
+    width:40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 
 
 
@@ -345,4 +350,70 @@ li{
     align-items: center;
     border-radius: 12px;
     backdrop-filter: blur(6px);
+}
+
+
+.report-hidden{
+    display: none;
+}
+.report-background{
+    height:820px;
+    width:1470px;
+    border:1px solid #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+.report-background p{
+    border:none;
+    font-size: 22px;
+}
+.report-main{
+    height:300px;
+    width:500px;
+    padding:12px;
+    box-sizing: border-box;
+    text-align: center;
+    border:1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.button-report{
+    height:46px;
+    width:180px;
+    box-sizing: border-box;
+    padding:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    left:1250px;
+    margin-top:20px;
+}
+.button-report-close{
+    height:46px;
+    width:180px;
+    box-sizing: border-box;
+    padding:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
 }
