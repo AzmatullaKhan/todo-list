@@ -221,8 +221,8 @@ export const Home=()=>{
         document.getElementById('report-background').className='report-background'
         
        document.getElementById('report-total').textContent="Total Task Generated :"+no_of_tasks_total
-       document.getElementById('report-done').textContent="Total Task Generated :"+no_of_tasks_done
-       document.getElementById('report-removed').textContent="Total Task Generated :"+no_of_tasks_removed
+       document.getElementById('report-done').textContent="Total Task Done :"+no_of_tasks_done
+       document.getElementById('report-removed').textContent="Total Task Removed :"+no_of_tasks_removed
     
     }
 
@@ -247,6 +247,9 @@ export const Home=()=>{
                 <div className="username-main" id='username_main'><Username /></div>
                 <div className='addtask-hidden' id='addtask-background'><AddTask /></div>
                 <div className='report-hidden' id='report-background'><Report /></div>
+                <footer>
+                    <p><a href="https://github.com/AzmatullaKhan">Copyright © All Rights Reserved 2024 Azmatulla Khan ®</a></p>
+                </footer>
             </div>
         </div>
     )
