@@ -241,6 +241,9 @@ export const Home=()=>{
                 <div className='task-container' id='task_container'>
                 </div>
                 <button className='button-report' onClick={generateReport}>Generate Report</button>
+                <footer>
+                    <p><a href="https://github.com/AzmatullaKhan">Copyright © All Rights Reserved 2024 Azmatulla Khan ®</a></p>
+                </footer>
             </div>
             <div style={{position:"absolute"}}>
                 {/* <Username /> */}
